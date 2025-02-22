@@ -1,0 +1,26 @@
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: db_events
+      MYSQL_ROOT_PASSWORD: sEe@21
+      MYSQL_USER: db_events_usr
+      MYSQL_PASSWORD: 123Acesso
+    ports:
+      - 3307:3306
+    volumes:
+      - my-db-volume:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: sEe@21
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+
+volumes:
+  my-db-volume:
